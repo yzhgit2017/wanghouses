@@ -19,7 +19,7 @@
 	            		<div class="img-wrapper">
 	            			<img src="static/images/huxingtu1.jpg">
 	            		</div>
-	            		<p class="p1">三室两厅两卫 180㎡</p>
+	            		<p class="p1">两室一厅一卫 180㎡</p>
 	            		<p class="p2">均价：<span>2200/㎡</span></p>
 	            	</router-link>
 	            </div>           
