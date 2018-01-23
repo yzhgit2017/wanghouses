@@ -1,0 +1,186 @@
+<template>
+	<div class="buildings-list-wrapper">
+		<div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+		    <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
+		        <ul class="page-loadmore-list buildings-list">
+		            <li v-for="item in list">
+						<router-link to="">
+							<div class="img-wrapper">
+								<img src="static/images/loupantux.png">
+							</div>
+							<div class="text-wrapper">
+								<p class="p1">明星小区、精装修、家具齐全，拎包入住</p>
+								<p class="p2"><span>昌乐首席s5社区</span><span>一室一厅</span><span>75㎡</span></p>
+								<p class="p3"><span class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</span><span class="price">118万</span></p>
+								<p class="p4">
+									<template v-for="label in labels">
+										<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
+										<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
+										<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
+										<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
+										<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
+										<span v-else></span>
+									</template>
+								</p>						
+							</div>
+							<div class="icon-label"><img src="static/images/remai@3x.png"></div>
+						</router-link>
+					</li>
+		        </ul>
+		        <div slot="bottom" class="mint-loadmore-bottom">
+			        <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">加载更多 ↑</span>
+			        <span v-show="bottomStatus === 'loading'">
+			            <mt-spinner type="snake"></mt-spinner>
+			        </span>
+		        </div>
+		    </mt-loadmore>
+	    </div>
+    </div>
+</template>
+
+<script type="text/babel">
+  export default {
+    data() {
+      return {
+      	labels: ['住宅','在售','精装','地铁','随时看房'],
+        list: [],
+        allLoaded: false,
+        bottomStatus: '',
+        wrapperHeight: 0
+      };
+    },
+
+    methods: {
+      handleBottomChange(status) {
+        this.bottomStatus = status;
+      },
+
+      loadBottom() {
+        setTimeout(() => {
+          let lastValue = this.list[this.list.length - 1];
+          if (lastValue < 40) {
+            for (let i = 1; i <= 10; i++) {
+              this.list.push(lastValue + i);
+            }
+          } else {
+            this.allLoaded = true;
+          }
+          this.$refs.loadmore.onBottomLoaded();
+        }, 1500);
+      }
+    },
+
+    created() {
+      for (let i = 1; i <= 20; i++) {
+        this.list.push(i);
+      }
+    },
+
+    mounted() {
+      this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+    }
+  };
+</script>
+
+<style scoped lang="scss">
+	@import 'static/css/mixin.scss';
+	.buildings-list-wrapper{
+		padding-top: 3.6rem;		
+		.buildings-list{
+			padding: 0 15px 15px 15px;
+			margin-top: -1px;
+			background-color: #fff;
+			li{
+				padding: 15px 0;
+				border-top: 1px solid #ececec;
+				a{
+					position: relative;
+					display: block;
+					@include flex(left,normal);
+					.img-wrapper{
+						width: 28%;
+						img{
+							width: 100%;
+							// height: 4rem;
+							display: block;							
+							margin-top: .5rem;
+						}
+					}
+					.text-wrapper{						
+						width: 72%;
+						padding: 0 .5rem;
+						box-sizing: border-box;
+						.p1{
+							color: #333;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+							font-size: .7rem;
+						}
+						.p2{
+							color: #333;
+							span{
+								margin-right: .5rem;
+								display: inline-block;
+							}
+						}
+						.p3{
+							color: #999;
+							.address{
+								display: inline-block;
+								width: 6rem;
+								overflow: hidden;
+								text-overflow: ellipsis;
+								white-space: nowrap;
+								margin-right: .6rem;
+								vertical-align: middle;
+							}
+							.price{
+								color: red;
+								font-size: .65rem;
+								vertical-align: middle;
+							}
+						}
+						.price{
+							color: red;
+							font-size: .7rem;
+							margin-right: 1rem;
+						}						
+						.p4{
+							span{
+								display: inline-block;
+								padding: 1px 8px;
+								border: 1px solid #ececec;
+								border-radius: 2px;
+								margin-right: 5px;
+								margin-bottom: 5px;
+							}
+						}						
+					}
+					.icon-label{
+						position: absolute;
+						top: 0;
+						right: 0;
+						width: 1.8rem;
+						img{
+							display: block;
+							width: 100%;								
+						}
+					}
+				}
+			}
+		}
+		.mint-loadmore-bottom{
+			text-align: center;
+			color: #666;
+			background-color: #fff;
+			span{
+				display: inline-block;
+			}
+			.mint-spinner {
+		        display: inline-block;
+		        vertical-align: middle;
+		    }
+		}
+	}
+</style>

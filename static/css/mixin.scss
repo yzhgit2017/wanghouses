@@ -1,0 +1,24 @@
+@mixin wh($width, $height){
+	width: $width;
+	height: $height;
+}
+@mixin flex($jc,$ai){
+	display: flex;
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    -webkit-box-pack: $jc;
+    -ms-flex-pack: $jc;
+    -webkit-justify-content: $jc;
+    justify-content: $jc;
+    -webkit-box-align: $ai;
+    -ms-flex-align: $ai;
+    -webkit-align-items: $ai;
+    align-items: $ai;
+}
+@mixin pad{
+    width: 100%;
+    padding: .75rem .75rem;
+    box-sizing: border-box;
+    background-color: #fff;
+}
