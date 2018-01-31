@@ -12,6 +12,14 @@
 		<adsense-three></adsense-three>
 		<special-offer-houses></special-offer-houses>
 		<best-houses-type></best-houses-type>
+		<adsense-four></adsense-four>
+		<information-detail></information-detail>
+		<price-action-detail></price-action-detail>
+		<adsense-five></adsense-five>
+		<map-around></map-around>
+		<sand-table></sand-table>
+		<map-storage></map-storage>
+		<recommended-buildings></recommended-buildings>
 	</div>
 </template>
 
@@ -23,6 +31,14 @@
 	import adsenseThree from './adsenseThree'
 	import specialOfferHouses from './specialOfferHouses'
 	import bestHousesType from './bestHousesType'
+	import adsenseFour from './adsenseFour'
+	import informationDetail from './informationDetail'
+	import priceActionDetail from './priceActionDetail'
+	import adsenseFive from './adsenseFive'
+	import mapAround from './mapAround'
+	import sandTable from './sandTable'
+	import mapStorage from './mapStorage'
+	import recommendedBuildings from './recommendedBuildings'
 	export default {
 		name: 'anchorNav',
 		data(){
@@ -31,7 +47,7 @@
 				anchorArray: ['楼盘详情','视频看房','特价房源','精品户型','时惠资讯','价格走势','周边配套','电子沙盘','图库','推荐楼盘']
 			}
 		},
-		components: {buildingsDetail,adsenseOne,watchHouses,adsenseTwo,adsenseThree,specialOfferHouses,bestHousesType},
+		components: {buildingsDetail,adsenseOne,watchHouses,adsenseTwo,adsenseThree,specialOfferHouses,bestHousesType,adsenseFour,informationDetail,priceActionDetail,adsenseFive,mapAround,sandTable,mapStorage,recommendedBuildings},
 		mounted(){
 			this.newSwiper();			
 		},

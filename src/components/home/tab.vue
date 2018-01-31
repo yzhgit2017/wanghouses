@@ -7,7 +7,7 @@
 		</ul>
 		<div class="content">
 			<ul v-for="(content,index) in contents" v-bind:class="{'active':isIndex==index}">
-				<li v-for="item in content.items"><router-link :to="{path:item.path}" @click.native="refresh()"><img :src="item.img"><p class="tab-item-p">{{item.instruction}}</p></router-link></li>
+				<li v-for="item in content.items"><router-link :to="{path:item.path}"><img :src="item.img"><p class="tab-item-p">{{item.instruction}}</p></router-link></li>
 			</ul>
 		</div>
 		<ul class="tabs-bottom">
@@ -145,9 +145,7 @@
           
 		},
 		methods:{
-			refresh:function(){
-				this.$router.go(0)
-			}
+			
 		},
 		watch:{
 			

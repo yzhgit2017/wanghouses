@@ -5,7 +5,8 @@
 		<buildings-detail></buildings-detail>
 		<function-swiper></function-swiper>
 		<selling-point></selling-point>
-		<anchor-wrapper></anchor-wrapper>	
+		<anchor-wrapper></anchor-wrapper>
+		<footer-detail></footer-detail>	
 	</div>
 </template>
 
@@ -16,9 +17,10 @@
 	import functionSwiper from './functionSwiper'
 	import sellingPoint from './sellingPoint'
 	import anchorWrapper from './anchor/anchorNav'
+	import footerDetail from './footerDetail'
 	export default {
 		name: 'detailsIndex',
-		components: {myHeader,swiperDetail,buildingsDetail,functionSwiper,sellingPoint,anchorWrapper},
+		components: {myHeader,swiperDetail,buildingsDetail,functionSwiper,sellingPoint,anchorWrapper,footerDetail},
 	}
 </script>
 

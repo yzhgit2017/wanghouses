@@ -47,7 +47,7 @@
 	.events-wrapper{
 		height: 2rem;
 		width: 100%;
-		padding: 0 15px;
+		padding: 0 .75rem;
 		box-sizing: border-box;
 		overflow: hidden;
 		background-color: #fff;

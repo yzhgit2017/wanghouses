@@ -7,16 +7,28 @@
 <script>
 export default {
     name: 'app',
+    data(){
+        return {
+            
+        }
+    },
+    // beforeRouteEnter (to, from, next) {
+         
+    //     next(vm => {
+    //          alert(2)
+    //          vm.aa();
+    //     })
+    // }, 
+    beforeCreate(){
+        
+    },
     mounted(){
-    	this.refresh();
+    	
     },
     methods:{
-    	refresh:function(){
-    		window.onpopstate = function(){
-    			document.location.reload();
-    		}
-    	}
-    }
+       
+    },
+
 }
 </script>
 

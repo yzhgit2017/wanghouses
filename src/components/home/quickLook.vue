@@ -79,7 +79,7 @@
 		}
 		.quickLook-other{
 			width: 100%;
-			padding: .5rem 15px;
+			padding: .5rem .75rem;
 			margin-top: .5rem;
 			background-color: #fff;
 			box-sizing: border-box;

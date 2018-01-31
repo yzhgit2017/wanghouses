@@ -4,234 +4,26 @@
 			<span>十盘必看</span>
 		</div>
 		<ul class="tenBuildings-list">
-			<li>
+			<li v-for="(item,index) in tenBuildingsList">
 				<router-link to="">
 					<div class="img-wrapper">
-						<img src="static/images/loupantux.png">
+						<img :src="'http://wangwu.lami360.com' + item.houses_img">
 					</div>
 					<div class="text-wrapper">
-						<p><span class="title">全程一号院</span><span class="sub-title">昌乐首席5s社区</span></p>
-						<p class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</p>
-						<p class="p3"><span class="price">2200/㎡</span>佣金：<span class="commission">6000</span>&nbsp;元</p>
-						<p class="p4">
-							<template v-for="label in labels">
-								<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-								<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-								<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-								<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-								<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-								<span v-else></span>
-							</template>
+						<p><span class="self-title">{{item.houses_name}}</span><span class="sub-title">{{item.subTitle}}</span></p>
+						<p class="address">{{item.houses_address}}</p>
+						<p class="p3"><span class="price">{{item.houses_price}}/㎡</span><!-- 佣金：<span class="commission">{{item.commission}}</span>&nbsp;元 --></p>
+						<p class="p4">							
+						    <span v-if="item.houses_type != ''" style="color: #44cc00;" v-bind:class="{'active': item.houses_type != null}">{{item.houses_type}}</span>	
+							<span v-if="item.finish_statu != ''" style="color: #00cccb;" v-bind:class="{'active': item.finish_statu != null}">{{item.finish_statu}}</span>
+							<span v-if="item.sale_type != ''" style="color: #cd8902;" v-bind:class="{'active': item.sale_type != null}">{{item.sale_type}}</span>
+							<span v-if="item.jiaotong != ''" style="color: #0044cb;;" v-bind:class="{'active': item.jiaotong != null}">{{item.jiaotong}}</span>
 						</p>						
 					</div>
-					<div class="icon-label"><img src="static/images/remai@3x.png"></div>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="">
-					<div class="img-wrapper">
-						<img src="static/images/loupantux.png">
+					<div class="icon-label">					    
+					    <img src="static/images/remai@3x.png" v-if="item.is_hou == '1'">
+					    <img v-else style="display: none;">
 					</div>
-					<div class="text-wrapper">
-						<p><span class="title">全程一号院</span><span class="sub-title">昌乐首席5s社区</span></p>
-						<p class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</p>
-						<p class="p3"><span class="price">2200/㎡</span>佣金：<span class="commission">6000</span>&nbsp;元</p>
-						<p class="p4">
-							<template v-for="label in labels">
-								<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-								<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-								<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-								<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-								<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-								<span v-else></span>
-							</template>
-						</p>						
-					</div>
-					<div class="icon-label"><img src="static/images/tejia@3x.png"></div>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="">
-					<div class="img-wrapper">
-						<img src="static/images/loupantux.png">
-					</div>
-					<div class="text-wrapper">
-						<p><span class="title">全程一号院</span><span class="sub-title">昌乐首席5s社区</span></p>
-						<p class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</p>
-						<p class="p3"><span class="price">2200/㎡</span>佣金：<span class="commission">6000</span>&nbsp;元</p>
-						<p class="p4">
-							<template v-for="label in labels">
-								<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-								<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-								<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-								<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-								<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-								<span v-else></span>
-							</template>
-						</p>						
-					</div>
-					<div class="icon-label"><img src="static/images/remai@3x.png"></div>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="">
-					<div class="img-wrapper">
-						<img src="static/images/loupantux.png">
-					</div>
-					<div class="text-wrapper">
-						<p><span class="title">全程一号院</span><span class="sub-title">昌乐首席5s社区</span></p>
-						<p class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</p>
-						<p class="p3"><span class="price">2200/㎡</span>佣金：<span class="commission">6000</span>&nbsp;元</p>
-						<p class="p4">
-							<template v-for="label in labels">
-								<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-								<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-								<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-								<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-								<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-								<span v-else></span>
-							</template>
-						</p>						
-					</div>
-					<div class="icon-label" v-if="false"><img src=""></div>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="">
-					<div class="img-wrapper">
-						<img src="static/images/loupantux.png">
-					</div>
-					<div class="text-wrapper">
-						<p><span class="title">全程一号院</span><span class="sub-title">昌乐首席5s社区</span></p>
-						<p class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</p>
-						<p class="p3"><span class="price">2200/㎡</span>佣金：<span class="commission">6000</span>&nbsp;元</p>
-						<p class="p4">
-							<template v-for="label in labels">
-								<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-								<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-								<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-								<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-								<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-								<span v-else></span>
-							</template>
-						</p>						
-					</div>
-					<div class="icon-label" v-if="false"><img src=""></div>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="">
-					<div class="img-wrapper">
-						<img src="static/images/loupantux.png">
-					</div>
-					<div class="text-wrapper">
-						<p><span class="title">全程一号院</span><span class="sub-title">昌乐首席5s社区</span></p>
-						<p class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</p>
-						<p class="p3"><span class="price">2200/㎡</span>佣金：<span class="commission">6000</span>&nbsp;元</p>
-						<p class="p4">
-							<template v-for="label in labels">
-								<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-								<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-								<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-								<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-								<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-								<span v-else></span>
-							</template>
-						</p>						
-					</div>
-					<div class="icon-label" v-if="false"><img src=""></div>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="">
-					<div class="img-wrapper">
-						<img src="static/images/loupantux.png">
-					</div>
-					<div class="text-wrapper">
-						<p><span class="title">全程一号院</span><span class="sub-title">昌乐首席5s社区</span></p>
-						<p class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</p>
-						<p class="p3"><span class="price">2200/㎡</span>佣金：<span class="commission">6000</span>&nbsp;元</p>
-						<p class="p4">
-							<template v-for="label in labels">
-								<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-								<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-								<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-								<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-								<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-								<span v-else></span>
-							</template>
-						</p>						
-					</div>
-					<div class="icon-label" v-if="false"><img src=""></div>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="">
-					<div class="img-wrapper">
-						<img src="static/images/loupantux.png">
-					</div>
-					<div class="text-wrapper">
-						<p><span class="title">全程一号院</span><span class="sub-title">昌乐首席5s社区</span></p>
-						<p class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</p>
-						<p class="p3"><span class="price">2200/㎡</span>佣金：<span class="commission">6000</span>&nbsp;元</p>
-						<p class="p4">
-							<template v-for="label in labels">
-								<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-								<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-								<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-								<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-								<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-								<span v-else></span>
-							</template>
-						</p>						
-					</div>
-					<div class="icon-label" v-if="false"><img src=""></div>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="">
-					<div class="img-wrapper">
-						<img src="static/images/loupantux.png">
-					</div>
-					<div class="text-wrapper">
-						<p><span class="title">全程一号院</span><span class="sub-title">昌乐首席5s社区</span></p>
-						<p class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</p>
-						<p class="p3"><span class="price">2200/㎡</span>佣金：<span class="commission">6000</span>&nbsp;元</p>
-						<p class="p4">
-							<template v-for="label in labels">
-								<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-								<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-								<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-								<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-								<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-								<span v-else></span>
-							</template>
-						</p>						
-					</div>
-					<div class="icon-label" v-if="false"><img src=""></div>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="">
-					<div class="img-wrapper">
-						<img src="static/images/loupantux.png">
-					</div>
-					<div class="text-wrapper">
-						<p><span class="title">全程一号院</span><span class="sub-title">昌乐首席5s社区</span></p>
-						<p class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</p>
-						<p class="p3"><span class="price">2200/㎡</span>佣金：<span class="commission">6000</span>&nbsp;元</p>
-						<p class="p4">
-							<template v-for="label in labels">
-								<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-								<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-								<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-								<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-								<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-								<span v-else></span>
-							</template>
-						</p>						
-					</div>
-					<div class="icon-label" v-if="false"><img src=""></div>
 				</router-link>
 			</li>
 		</ul>
@@ -239,13 +31,32 @@
 </template>
 
 <script>
+	import qs from 'qs'
 	export default {
 		name: 'tenBuildings',
+		props: ['paramCityName'],
 		data(){
 			return {
-				labels: ['住宅','在售','精装','地铁','随时看房'],
+				tenBuildingsList: [],					
 			}
-		}
+		},
+		mounted(){
+			
+		},
+		methods: {
+			getTenBuildings(cityNmme){
+				this.$http.post('http://wangwu.lami360.com/Jiekou/index',qs.stringify({city_name: cityNmme})).then(response => {
+				    console.log(response.data)				
+					this.tenBuildingsList = response.data;
+				})			    
+			}
+		},
+		watch:{
+            paramCityName: function(){
+            	let cityNmme = this.paramCityName;
+            	this.getTenBuildings(cityNmme);
+            }
+        }
 	}
 </script>
 
@@ -276,10 +87,10 @@
 			}			
 		}
 		.tenBuildings-list{
-			padding: 0 15px 15px 15px;
+			padding: 0 .75rem .75rem .75rem;
 			margin-top: -1px;
 			li{
-				padding: 15px 0;
+				padding: .75rem 0;
 				border-top: 1px solid #ececec;
 				a{
 					position: relative;
@@ -327,12 +138,15 @@
 						}
 						.p4{
 							span{
-								display: inline-block;
+								display: none;
 								padding: 1px 8px;
 								border: 1px solid #ececec;
 								border-radius: 2px;
 								margin-right: 5px;
 								margin-bottom: 5px;
+							}
+							span.active{
+								display: inline-block;
 							}
 						}						
 					}

@@ -4,26 +4,30 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 const state = {
-	navActiveIndex: null,
+	geolocation: function(){
+        let geolocationCityName = localStorage.cityName;
+        return geolocationCityName;
+    },
+   
 }
 
 const mutations={
-    changeNavActiveIndex(state,index){   	
-        state.navActiveIndex = index;
-
+    changeCityName(state,index){   	
+        state.cityName = index;
     },
 }
 
 const getters = {
-    navActiveIndex:function(state){
-        return state.navActiveIndex;
-    }
+    updatedCityName:function(state){
+        var aa = state.geolocation();
+        return aa;
+    },
+   
 }
 
 const actions ={
-    changeNavActiveIndexAction({commit},index){
-
-        commit('changeNavActiveIndex',index)
+    changeCityNameAction({commit},index){
+        commit('changeCityName',index)
     },
 }
 

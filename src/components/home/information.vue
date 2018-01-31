@@ -101,10 +101,10 @@
 			}			
 		}
 		.information-list{
-			padding: 0 15px 15px 15px;
+			padding: 0 .75rem .75rem .75rem;
 			margin-top: -1px;
 			li{
-				padding: 15px 0;
+				padding: .75rem 0;
 				border-top: 1px solid #ececec;
 				.tw-container{
 					display: block;

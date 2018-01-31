@@ -13,23 +13,40 @@
 					<section v-show="sortBy == 'area'" class="category_container sort_detail_type">
 						<section class="category_left">
 						    <ul>
-						    	<li class="category_li" v-for="(item,index) in areaFilterItemArray" @click="getAreaList(index)" v-bind:class="{'active':areaItemIndex==index}">
+						    	<li class="category_li" v-for="(item,index) in areaFilterItemArray" @click="getAreaList(index,item.id)" v-bind:class="{'active':areaItemIndex==index}">
 						    		<section>
-										<span>{{item}}</span>
+										<span>{{item.name}}</span>
 									</section>
 									<section>
 										<i class="iconfont icon-arrow1"></i>
 									</section>									
 						    	</li>						    	
 						    </ul>
+						</section>
+						<section class="category_center">
+							<ul>
+								<li class="category_li" @click="getAllAreaChild()" v-bind:class="{'active':areaIndex==0}">
+						            <section>
+						                <span>不限</span>
+						            </section>
+								</li>
+						    	<li class="category_li" v-bind:class="{'active':areaIndex==index+1}" v-for="(item,index) in areaFilterDetailArray" @click="getAreaChild(index+1,item.name,item.id)">
+						    		<section>
+										<span>{{item.name}}</span>
+									</section>
+									<section>
+	    								<i class="iconfont icon-arrow1"></i>
+									</section>
+						    	</li>
+						    </ul>
 						</section>						
 						<section class="category_right">
 							<ul>
-								<li class="category_li">								    
+								<li class="category_li" @click="getAllAreaBuildings()">								    
 									<span>不限</span>									
 								</li>
-								<li class="category_li" v-for="(item,index) in areaFilterDetailArray">
-									<span>{{item}}</span>
+								<li class="category_li" v-for="(item,index) in districtList" @click="filterAreaBuildings(item.name)">
+									<span>{{item.name}}</span>
 								</li>
 							</ul>
 						</section>
@@ -64,7 +81,7 @@
 									    <span>不限</span>
 									</section>
 								</li>
-						    	<li class="category_li" v-for="(item,index) in priceList" @click="getPriceList(index,item.option)">
+						    	<li class="category_li" v-for="(item,index) in priceList" @click="filterPriceList(index,item.option)">
 						    		<section>
 										<span>{{item.text}}</span>
 									</section>
@@ -155,20 +172,35 @@
 		<transition name="showcover">
     		<div class="back_cover" v-show="sortBy"></div>
     	</transition>
-    	<buildings-list></buildings-list>
+    	<buildings-list :paramAreaSort="areaLeftId" :paramArea="areaCenterName" :paramStreet="areaName" :paramPriceOption="priceOption" :paramBuXian="buxian"></buildings-list>
 	</div>
 </template>
 
 <script>
     import myHeader from '@/components/public/header'
     import buildingsList from './test'
+    import {mapGetters} from 'vuex'
+    import qs from 'qs'
 	export default {
 		name: 'newHousesIndex',
 		data(){
 			return {
-				areaFilterItemArray: ['区域','学校','商圈'],
+				areaFilterItemArray: [
+					{
+						id: '3',
+						name: '区域'
+					},
+					{
+						id: '2',
+						name: '学校'
+					},
+					{
+						id: '1',
+						name: '商圈'
+					}
+				],
 				priceFilterItemArray: ['单价','总价'],
-				areaFilterDetailArray: ['天桥区','槐荫区','市中区'],				
+				areaFilterDetailArray: [],				
 				sortBy: '',				
 				areaItemIndex: 0,
 				priceItemIndex: 0,
@@ -180,6 +212,18 @@
 				decorationType:null,
 				natureType:null,
 				openType:null,
+				// 修改
+				areaName: null,
+				priceOption: null,
+				areaIndex: 0,
+				districtList:[],
+				areaLeftId: '3',
+				areaCenterId: null,
+				areaRightId: null,
+				areaCenterName: '不限',
+				buxian_id: 0,
+				buxian: false,
+				// 修改
 				priceList: [
 					{
 				    	'option': 1,
@@ -487,11 +531,35 @@
 				},
 			}
 		},
+		computed: {
+	        ...mapGetters({
+	            updatedCityName: 'updatedCityName'
+	        }),
+	    },
 		mounted(){
-	    		    	
+	    	this.init();
 	    },
 	    components:{myHeader,buildingsList},
 	    methods:{
+	    	init(){
+	    		let cityName = this.updatedCityName;
+	    		console.log(cityName)
+	    		this.$http.post('http://wangwu.lami360.com/Jiekou/area',qs.stringify({city_name: cityName})).then(response => {
+				    console.log(response.data)				  
+				    for (var i = 0; i < response.data.length; i++) {
+				    	this.areaFilterDetailArray.push(response.data[i]);
+				    }
+				    this.areaCenterId = this.areaFilterDetailArray[0].name;				
+			    })
+	    		this.$http.post('http://wangwu.lami360.com/Jiekou/buxian',qs.stringify({city_name: cityName, types_id: '3',res: '0'})).then(response => {
+					    console.log(response.data)			  
+					    for (var i = 0; i < response.data.length; i++) {
+					    	this.districtList.push(response.data[i]);
+					    }					
+				    })	
+
+			    
+	    	},
 	    	chooseType(type){
 	    		if (this.sortBy !== type) {
 	    			this.sortBy = type;
@@ -499,9 +567,77 @@
 	    			this.sortBy = '';
 	    		}
 	    	},
-	    	getAreaList(index){
+	    	getAreaList(index,id){
 	    		this.areaItemIndex = index;
+	    		let cityName = this.updatedCityName;	    		
+	    		this.areaLeftId = id;
+	    		this.$http.post('http://wangwu.lami360.com/Jiekou/area',qs.stringify({city_name: cityName})).then(response => {
+				    console.log(response.data)
+				    this.areaFilterDetailArray = [];
+				    for (var i = 0; i < response.data.length; i++) {
+				    	this.areaFilterDetailArray.push(response.data[i]);				    	
+				    }												
+			    })			   
+			    if(this.areaCenterId == 0){
+			    	this.$http.post('http://wangwu.lami360.com/Jiekou/buxian',qs.stringify({city_name: cityName, types_id: this.areaLeftId,res: '0'})).then(response => {
+					    console.log(response.data)
+					    this.districtList = [];			  
+					    for (var i = 0; i < response.data.length; i++) {
+					    	this.districtList.push(response.data[i]);
+					    }					
+				    })
+			    }else{
+			    	this.$http.post('http://wangwu.lami360.com/Jiekou/jiedao',qs.stringify({types_id: id,area_id:this.areaCenterId})).then(response => {
+					    console.log(response.data)
+					    this.districtList = [];			  
+					    for (var i = 0; i < response.data.length; i++) {
+					    	this.districtList.push(response.data[i]);
+					    }					
+				    })
+			    }
+			    this.buxian = false;
+
 	    	},
+	    	// 修改
+	    	filterAreaBuildings(name){
+	    		this.areaName = name;
+	    		this.buxian = false;	    		
+	    	},
+	    	filterPriceList(index,option){
+	    		this.priceOption = option;
+	    	},
+	    	getAllAreaChild(){
+	    		this.areaIndex = 0;
+	    		this.areaCenterId = 0;
+	    		this.areaCenterName = '不限';
+	    		this.$http.post('http://wangwu.lami360.com/Jiekou/buxian',qs.stringify({city_name: this.updatedCityName, types_id: this.areaLeftId ,res: '0'})).then(response => {
+					    console.log(response.data)
+					    this.districtList = [];				  
+					    for (var i = 0; i < response.data.length; i++) {
+					    	this.districtList.push(response.data[i]);
+					    }					
+				    })
+	    		this.buxian = false;
+	    	},
+	    	getAreaChild(index,name,id){
+	    		this.areaIndex = index;
+	    		this.areaCenterName = name;
+	    		this.areaCenterId = id;
+	    		this.$http.post('http://wangwu.lami360.com/Jiekou/jiedao',qs.stringify({types_id: this.areaLeftId,area_id:id})).then(response => {
+					    console.log(response.data)
+					    this.districtList = [];				  
+					    for (var i = 0; i < response.data.length; i++) {
+					    	this.districtList.push(response.data[i]);
+					    }					
+				    })
+	    		this.buxian = false;
+	    	},
+	    	getAllAreaBuildings(){
+	    		this.buxian_id++;
+	    		this.areaName = '不限_' + this.buxian_id;
+	    		this.buxian = true;
+	    	},
+	    	// 修改
 	    	getPriceList(index){
 	    		this.priceItemIndex = index;
 	    		this.priceList = this.priceItemList[index];
@@ -627,6 +763,9 @@
 					    height: 16rem;
 					    overflow-y: auto;
 					    border-right: 1px solid #ececec;
+					    .category_li.active{
+					    	color: #2bddbe;
+					    }
 					    .category_li.active:before{
 							content: '';
 						    position: absolute;
@@ -642,6 +781,27 @@
 						-webkit-box-flex: 0.5;
 					    -ms-flex: 0.5;
 					    flex: 0.5;
+					}
+					.category_center{
+						-webkit-box-flex: 1;
+					    -ms-flex: 1;
+					    flex: 1;
+					    height: 16rem;
+					    overflow-y: auto;
+					    border-right: 1px solid #ececec;
+					    .category_li.active{
+					    	color: #2bddbe;
+					    }
+					    .category_li.active:before{
+							content: '';
+						    position: absolute;
+						    width: 2px;
+						    height: .8rem;
+						    background: #2bddbe;
+						    left: 0;
+						    top: 50%;
+						    margin-top: -.4rem;
+						}
 					}
 					.category_right{
 						-webkit-box-flex: 1;

@@ -48,7 +48,7 @@
 	.buildings-detail-wrapper{
 		background-color: #fff;
 		.title{
-			padding: .5rem 15px;
+			padding: .5rem .75rem;
 			box-sizing: border-box;
 			border-bottom: 1px solid #ececec;
 			@include flex(space-between,center);
@@ -68,7 +68,7 @@
 			}
 		}
 		.content{
-			padding: .6rem 15px;
+			padding: .6rem .75rem;
 			.state{
 				span{
 					display: inline-block;

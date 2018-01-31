@@ -6,24 +6,23 @@
 		            <li v-for="item in list">
 						<router-link to="">
 							<div class="img-wrapper">
-								<img src="static/images/loupantux.png">
+								<img :src="'http://wangwu.lami360.com' + item.houses_img">
 							</div>
 							<div class="text-wrapper">
-								<p class="p1">明星小区、精装修、家具齐全，拎包入住</p>
-								<p class="p2"><span>昌乐首席s5社区</span><span>一室一厅</span><span>75㎡</span></p>
-								<p class="p3"><span class="address">历下区-县西巷北口1200号多福多寿范德萨范德萨发</span><span class="price">118万</span></p>
-								<p class="p4">
-									<template v-for="label in labels">
-										<span v-if="label == '住宅'" style="color: #44cc00;">{{label}}</span>
-										<span v-else-if="label == '在售'" style="color: #cd8902;">{{label}}</span>
-										<span v-else-if="label == '精装'" style="color: #00cccb;">{{label}}</span>
-										<span v-else-if="label == '地铁'" style="color: #0044cb;">{{label}}</span>
-										<span v-else-if="label == '随时看房'" style="color: #8800cc;">{{label}}</span>
-										<span v-else></span>
-									</template>
+								<p><span class="self-title">{{item.houses_name}}</span><span class="sub-title">{{item.subTitle}}</span></p>
+								<p class="address">{{item.houses_address}}</p>
+								<p class="p3"><span class="price">{{item.houses_price}}/㎡</span><!-- 佣金：<span class="commission">{{item.commission}}</span>&nbsp;元 --></p>
+								<p class="p4">							
+								    <span v-if="item.houses_type != ''" style="color: #44cc00;" v-bind:class="{'active': item.houses_type != null}">{{item.houses_type}}</span>	
+									<span v-if="item.finish_statu != ''" style="color: #00cccb;" v-bind:class="{'active': item.finish_statu != null}">{{item.finish_statu}}</span>
+									<span v-if="item.sale_type != ''" style="color: #cd8902;" v-bind:class="{'active': item.sale_type != null}">{{item.sale_type}}</span>
+									<span v-if="item.jiaotong != ''" style="color: #0044cb;;" v-bind:class="{'active': item.jiaotong != null}">{{item.jiaotong}}</span>
 								</p>						
 							</div>
-							<div class="icon-label"><img src="static/images/remai@3x.png"></div>
+							<div class="icon-label">					    
+							    <img src="static/images/remai@3x.png" v-if="item.is_hou == '1'">
+							    <img v-else style="display: none;">
+							</div>
 						</router-link>
 					</li>
 		        </ul>
@@ -39,47 +38,101 @@
 </template>
 
 <script type="text/babel">
-  export default {
-    data() {
-      return {
-      	labels: ['住宅','在售','精装','地铁','随时看房'],
-        list: [],
-        allLoaded: false,
-        bottomStatus: '',
-        wrapperHeight: 0
-      };
-    },
-
-    methods: {
-      handleBottomChange(status) {
-        this.bottomStatus = status;
-      },
-
-      loadBottom() {
-        setTimeout(() => {
-          let lastValue = this.list[this.list.length - 1];
-          if (lastValue < 40) {
-            for (let i = 1; i <= 10; i++) {
-              this.list.push(lastValue + i);
-            }
-          } else {
-            this.allLoaded = true;
-          }
-          this.$refs.loadmore.onBottomLoaded();
-        }, 1500);
-      }
-    },
-
-    created() {
-      for (let i = 1; i <= 20; i++) {
-        this.list.push(i);
-      }
-    },
-
-    mounted() {
-      this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
-    }
-  };
+	import {mapGetters} from 'vuex'
+	import qs from 'qs'
+    export default {
+	    data() {
+	      return {
+	      	labels: ['住宅','在售','精装','地铁','随时看房'],
+	        list: [],
+	        allList: [],
+	        allLoaded: false,
+	        bottomStatus: '',
+	        wrapperHeight: 0,	        
+	      };
+	    },
+	    props: ['paramStreet','paramPriceOption','paramArea','paramAreaSort','paramBuXian'],
+	    computed: {
+	        ...mapGetters({
+	            updatedCityName: 'updatedCityName'
+	        }),	    
+	    },
+	    methods: {
+		    handleBottomChange(status) {
+		        this.bottomStatus = status;
+		    },
+	        loadBottom() {
+		        setTimeout(() => {
+			        let listLength = this.list.length;
+			        let tr = this.allList.length%10;
+			        if (listLength < this.allList.length) {				            
+			            if(listLength < this.allList.length - tr){
+			            	for (let i = listLength; i < 10+ listLength; i++) {	
+				                this.list.push(this.allList[i]);
+				            }
+			            }else{
+			            	for (let i = listLength; i < this.allList.length; i++) {            	
+				                this.list.push(this.allList[i]);
+				            }
+			            }    				           
+			        } else {
+			            this.allLoaded = true;
+			        }
+			        this.$refs.loadmore.onBottomLoaded();
+		        }, 1500);
+	        },
+	        areaFilter(cityName,areaSort,areaName,streetName,priceOption) {
+	        	let sn;
+	        	if(this.paramBuXian){
+	        		sn = '不限';
+	        	}else{
+	        		sn = streetName;
+	        	}
+		    	this.$http.post('http://wangwu.lami360.com/Jiekou/lists',qs.stringify({city_name: cityName, types_id: areaSort, area_name: areaName, street_name: sn, price: priceOption})).then(response => {
+					    console.log(response.data)
+					    this.allList = [];
+					    for (var i = 0; i < response.data.length; i++) {
+					    	this.allList.push(response.data[i]);
+					    }
+					    this.list = this.allList;				
+				    })	
+	        },
+	        priceFilter(cityName,areaName,priceOption) {
+		    	this.$http.post('http://wangwu.lami360.com/Jiekou/lists',qs.stringify({city_name: cityName,area_name: areaName,price: priceOption})).then(response => {
+					    console.log(response.data)
+					    this.allList = [];
+					    for (var i = 0; i < response.data.length; i++) {
+					    	this.allList.push(response.data[i]);
+					    }
+					    this.list = this.allList;				
+				    })	
+	        },
+	        init(){
+	        	let cityName = this.updatedCityName;
+	    		this.$http.post('http://wangwu.lami360.com/Jiekou/lists',qs.stringify({city_name: cityName})).then(response => {
+				    console.log(response.data)
+				    for (var i = 0; i < response.data.length; i++) {
+				    	this.allList.push(response.data[i]);
+				    }					
+			    })	
+	        }
+	    },
+	    created() {
+		    this.init();
+	    },
+	    mounted() {
+	      this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;	     
+	    },
+	    watch:{
+	        paramStreet: function(){
+	        	console.log(this.updatedCityName,this.paramAreaSort,this.paramArea,this.paramStreet)
+	            this.areaFilter(this.updatedCityName,this.paramAreaSort,this.paramArea,this.paramStreet,this.paramPriceOption)	            
+	        },       
+	        paramPriceOption: function(){
+	        	this.priceFilter(this.updatedCityName,this.paramAreaName,this.paramPriceOption);
+	        }           
+	    }
+    };
 </script>
 
 <style scoped lang="scss">
@@ -87,11 +140,11 @@
 	.buildings-list-wrapper{
 		padding-top: 3.6rem;		
 		.buildings-list{
-			padding: 0 15px 15px 15px;
+			padding: 0 .75rem .75rem .75rem;
 			margin-top: -1px;
 			background-color: #fff;
 			li{
-				padding: 15px 0;
+				padding: .75rem 0;
 				border-top: 1px solid #ececec;
 				a{
 					position: relative;
@@ -148,12 +201,15 @@
 						}						
 						.p4{
 							span{
-								display: inline-block;
+								display: none;
 								padding: 1px 8px;
 								border: 1px solid #ececec;
 								border-radius: 2px;
 								margin-right: 5px;
 								margin-bottom: 5px;
+							}
+							span.active{
+								display: inline-block;
 							}
 						}						
 					}

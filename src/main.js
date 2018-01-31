@@ -13,8 +13,14 @@ import 'static/css/swiper.min.css'
 import 'static/js/swiper.min.js'
 import 'static/js/jquery-1.9.1.min.js'
 import store from '@/store/store'
+import echarts from 'echarts'
+import axios from 'axios'
+
 
 Vue.config.productionTip = false
+Vue.prototype.$echarts = echarts
+Vue.prototype.$http = axios
+
 
 /* eslint-disable no-new */
 new Vue({

@@ -2,12 +2,12 @@
 	<div class="header-wrapper">
 		<header class="header">
 			<div class="header-container" v-if="selfHomeHeader">
-				<router-link to="" class="geolocation">济南济南<i class="iconfont icon-arrow-down-new"></i></router-link>
+				<router-link to="/cityChange" class="geolocation">{{cityName}}<i class="iconfont icon-arrow-down-new"></i></router-link>
 				<router-link to="" class="search"><i class="iconfont icon-sousuo-copy"></i>请输入楼盘名</router-link>
 				<router-link to="" class="personal"><i class="iconfont icon-gerenzhongxin1"></i><br>我的</router-link>
 			</div>
 			<div class="header-container" v-if="selfBuildingsListHeader">
-				<router-link to="" class="geolocation"><i class="iconfont icon-arrow"></i>所有楼盘</router-link>
+				<router-link to="" class="geolocation"><i class="iconfont icon-arrow"></i>返回</router-link>
 				<router-link to="" class="search"><i class="iconfont icon-sousuo-copy"></i>请输入小区名称或地址</router-link>
 				<router-link to="" class="map"><i class="iconfont icon-chakantiezidingwei"></i></router-link>
 			</div>
@@ -25,17 +25,34 @@
 </template>
 
 <script>
+	import {mapGetters} from 'vuex'
 	export default{
 		name: 'myHeader',
-		props: ['homeHeader','buildingsListHeader','buildingsDetailsHeader'],
+		props: ['homeHeader','buildingsListHeader','buildingsDetailsHeader','paramCityName'],
 		data(){
 			return {
 				selfHomeHeader: this.homeHeader,
 				selfBuildingsListHeader: this.buildingsListHeader,
 				selfBuildingsDetailsHeader: this.buildingsDetailsHeader,
+				cityName: null,
 			}
 		},
-
+		computed: {
+	        ...mapGetters({
+	            updatedCityName: 'updatedCityName'
+	        }),
+	    },
+		mounted(){
+			this.cityName = this.updatedCityName;
+		},
+		methods:{
+			
+		},
+		watch:{
+            paramCityName: function(){
+            	this.cityName = this.paramCityName;
+            }
+        }
 	}
 </script>
 
