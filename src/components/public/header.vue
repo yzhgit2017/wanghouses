@@ -7,7 +7,7 @@
 				<router-link to="" class="personal"><i class="iconfont icon-gerenzhongxin1"></i><br>我的</router-link>
 			</div>
 			<div class="header-container" v-if="selfBuildingsListHeader">
-				<router-link to="" class="geolocation"><i class="iconfont icon-arrow"></i>返回</router-link>
+				<span class="geolocation" @click="goBack()"><i class="iconfont icon-arrow"></i>返回</span>
 				<router-link to="" class="search"><i class="iconfont icon-sousuo-copy"></i>请输入小区名称或地址</router-link>
 				<router-link to="" class="map"><i class="iconfont icon-chakantiezidingwei"></i></router-link>
 			</div>
@@ -43,10 +43,17 @@
 	        }),
 	    },
 		mounted(){
+			// if (this.updatedCityName == null) {
+			// 	return;
+			// }else{
+			// 	this.cityName = this.updatedCityName;
+			// }
 			this.cityName = this.updatedCityName;
 		},
 		methods:{
-			
+			goBack(){
+				this.$router.go(-1);
+			}
 		},
 		watch:{
             paramCityName: function(){

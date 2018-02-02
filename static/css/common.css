@@ -5,12 +5,16 @@
 html{
 	box-sizing: border-box;
 	height: 100%;
+	/*min-height: 100%;
+	position: relative;*/
 }
 body{
 	font-family: "Microsoft Yahei";
 	font-size: .6rem;
 	background-color: #f7fbfc;
 	height: 100%;
+	/*min-height: 100%;
+	position: relative;*/
 }
 a{
 	text-decoration: none;
@@ -22,3 +26,15 @@ h2{
 	color: #333;
 	font-size: .75rem;
 }
+input::-webkit-search-cancel-button { 
+	-webkit-appearance: none; 
+}
+input{ 
+	outline: none; 
+}
+input::-webkit-input-placeholder { 
+	color: #999; 
+}
+input::-moz-placeholder { 
+	color: #999; 
+}	

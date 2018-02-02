@@ -9,6 +9,7 @@
 		<information></information>
 		<quick-look></quick-look>
 		<ten-buildings :paramCityName="cityName"></ten-buildings>
+		<!-- <div class="footer-bar"></div> -->
 	</div>
 </template>
 
@@ -65,6 +66,14 @@
 				width: 100%;
 				display: block;
 			}
+		}
+		.footer-bar{
+			position: fixed;
+			bottom: 0;
+			height: 2rem;
+			background-color: red;
+			width: 100%;
+			left: 0;
 		}
 	}
 </style>

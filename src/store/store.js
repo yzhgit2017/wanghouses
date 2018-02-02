@@ -8,12 +8,15 @@ const state = {
         let geolocationCityName = localStorage.cityName;
         return geolocationCityName;
     },
-   
+    loginPageHeight: null,
 }
 
 const mutations={
     changeCityName(state,index){   	
         state.cityName = index;
+    },
+    changeLoginPageHeight(state,index){     
+        state.loginPageHeight = index;
     },
 }
 
@@ -22,12 +25,18 @@ const getters = {
         var aa = state.geolocation();
         return aa;
     },
+    updatedLoginPageHeight:function(state){
+        return state.loginPageHeight;
+    },
    
 }
 
 const actions ={
     changeCityNameAction({commit},index){
         commit('changeCityName',index)
+    },
+    changeLoginPageHeightAction({commit},index){
+        commit('changeLoginPageHeight',index)
     },
 }
 

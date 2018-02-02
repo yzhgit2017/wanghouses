@@ -15,7 +15,7 @@
 				<span><i class="iconfont icon-shuaxin"></i></span>
 			</div>
 			<div class="content">
-				<router-link to="" v-for="item in hotSearch">{{item}}</router-link>
+				<router-link to="" v-for="(item,index) in hotSearch" :key="index">{{item}}</router-link>
 			</div>
 		</div>
 		<div class="history-search">

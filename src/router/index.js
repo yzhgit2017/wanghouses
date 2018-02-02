@@ -5,6 +5,10 @@ import allBuildings from '@/components/newHouses/allBuildings/index'
 import buildingsDetails from '@/components/newHouses/buildingsDetails/index'
 import cityChange from '@/components/cityChange/cityChange'
 import buildingsSearch from '@/components/buildingsSearch/buildingsSearch'
+import pwdLogin from '@/components/loginAndRegister/pwdLogin'
+import vcLogin from '@/components/loginAndRegister/vcLogin'
+import memberRegister from '@/components/loginAndRegister/memberRegister'
+
 
 Vue.use(Router)
 
@@ -34,6 +38,21 @@ export default new Router({
       path: '/buildingsSearch',
       name: 'buildingsSearch',
       component: buildingsSearch
+    },
+    {
+      path: '/pwdLogin',
+      name: 'pwdLogin',
+      component: pwdLogin
+    },
+    {
+      path: '/vcLogin',
+      name: 'vcLogin',
+      component: vcLogin
+    },
+    {
+      path: '/memberRegister',
+      name: 'memberRegister',
+      component: memberRegister
     },
   ]
 })
