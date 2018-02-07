@@ -1,8 +1,8 @@
 <template>
-	<div class="member-register-wrapper">
+	<div class="agent-company-wrapper">
 		<header>
 			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
-			<p>注册会员</p>
+			<p>认证经纪公司</p>
 			<div class="take-place"></div>
 		</header>
 		<div class="register-item-container">
@@ -60,11 +60,31 @@
 			        {{positionErrorMessage}}
 			    </mt-popup>
 			</div>
-			<div class="agreement-wrapper">
-				<span class="agree-icon-wrapper" @click="agreeChange()"><i class="iconfont" v-bind:class="agree ? 'icon-gouxuan' : 'icon-weixuanzhongyuanquan'"></i></span>
-				<router-link to="">我已阅读并同意旺屋用户协议</router-link>
+			<div class="register-item-wrapper">
+				<div class="register-item">					
+					<input type="text" name="" placeholder="请输入身份证号" v-model="idNumberValue">
+				</div>
+				<mt-popup v-model="idNumberPopup" popup-transition="popup-fade" class="popup-error-message" :modal="false">
+			        {{idNumberErrorMessage}}
+			    </mt-popup>
 			</div>
-			<div class="register-btn" @click="register()">注册</div>
+			<div class="input-file-item-wrapper">
+				<p class="title">上传身份证照片(正面)</p>
+				<div @click="loadIdCardFront()"><img src="static/images/shanczp1@3x.png"><input type="file" name="" id="idCardFront" style="display:none;"></div>
+			</div>
+			<div class="input-file-item-wrapper">
+				<p class="title">上传身份证照片(反面)</p>
+				<div @click="loadIdCardBack()"><img src="static/images/shanczp2@3x.png"><input type="file" name="" id="idCardBack" style="display:none;"></div>
+			</div>
+			<div class="input-file-item-wrapper">
+				<p class="title">上传门面照片</p>
+				<div @click="loadShopFront()"><img src="static/images/shanczp3@3x.png"><input type="file" name="" id="shopFront" style="display:none;"></div>
+			</div>
+			<div class="input-file-item-wrapper">
+				<p class="title">上传营业执照照片</p>
+				<div @click="loadBusinessLicence()"><img src="static/images/shanczp3@3x.png"><input type="file" name="" id="businessLicence" style="display:none;"></div>
+			</div>
+			<div class="register-btn" @click="register()">提交审核</div>
 			<mt-popup v-model="successPopup" popup-transition="popup-fade" class="popup-success-message">
 				<div class="success-container">
 				    <div class="icon-wrapper"><i class="iconfont icon-duihao"></i></div>
@@ -82,12 +102,11 @@
 <script>
 	import { Toast } from 'mint-ui';
 	export default {
-		name: 'memberRegister',
+		name: 'agentCompany',
 		data(){
 			return {
 				newEyeClose: false,
 				repeatEyeClose: false,
-				agree: true,
 				mobileNumberValue: null,
 				mobileNumberPopup: false,
 				mobileNumberErrorMessage: null,
@@ -106,7 +125,9 @@
 				positionValue: null,
 				positionPopup: false,
 				positionErrorMessage: null,
-				agreeValue: 1,
+				idNumberValue: null,
+				idNumberPopup: false,
+				idNumberErrorMessage: null,
 				successPopup: false,
 			}
 		},
@@ -127,14 +148,6 @@
 					obj.type = 'password';
 				}else{
 					obj.type = 'text';
-				}
-			},
-			agreeChange(){
-				this.agree = !this.agree;
-				if (this.agreeValue == 1) {
-					this.agreeValue = 0;
-				}else{
-					this.agreeValue = 1;
 				}
 			},
 			register(){
@@ -175,14 +188,30 @@
 			},
 			continueRegister(){
 				this.successPopup = false;
-			}
+			},
+			loadIdCardFront(){
+				let obj = document.querySelector('#idCardFront');
+				obj.click();
+			},
+			loadIdCardBack(){
+				let obj = document.querySelector('#idCardBack');
+				obj.click();
+			},
+			loadShopFront(){
+				let obj = document.querySelector('#shopFront');
+				obj.click();
+			},
+			loadBusinessLicence(){
+				let obj = document.querySelector('#businessLicence');
+				obj.click();
+			},
 		}
 	}
 </script>
 
 <style scoped lang="scss">
 	@import 'static/css/mixin.scss';
-	.member-register-wrapper{
+	.agent-company-wrapper{
 		width: 100%;
 		height: 100%;
 		background-color: #fff;
@@ -368,6 +397,17 @@
 							}
 						}
 					}
+				}
+			}
+			.input-file-item-wrapper{
+				margin-bottom: .5rem;
+				.title{
+					font-size: .65rem;
+					color: #999;
+					margin-bottom: .5rem;
+				}
+				img{
+					width: 100%;
 				}
 			}
 		}

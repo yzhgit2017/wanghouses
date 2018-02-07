@@ -1,8 +1,8 @@
 <template>
-	<div class="member-register-wrapper">
+	<div class="agent-register-wrapper">
 		<header>
 			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
-			<p>注册会员</p>
+			<p>注册经纪人</p>
 			<div class="take-place"></div>
 		</header>
 		<div class="register-item-container">
@@ -60,6 +60,11 @@
 			        {{positionErrorMessage}}
 			    </mt-popup>
 			</div>
+			<div class="register-item-wrapper">
+				<div class="register-item">					
+					<input type="text" name="" placeholder="请输入邀请码(选填)" v-model="inviteCodeValue">
+				</div>
+			</div>
 			<div class="agreement-wrapper">
 				<span class="agree-icon-wrapper" @click="agreeChange()"><i class="iconfont" v-bind:class="agree ? 'icon-gouxuan' : 'icon-weixuanzhongyuanquan'"></i></span>
 				<router-link to="">我已阅读并同意旺屋用户协议</router-link>
@@ -82,7 +87,7 @@
 <script>
 	import { Toast } from 'mint-ui';
 	export default {
-		name: 'memberRegister',
+		name: 'agentRegister',
 		data(){
 			return {
 				newEyeClose: false,
@@ -108,6 +113,7 @@
 				positionErrorMessage: null,
 				agreeValue: 1,
 				successPopup: false,
+				inviteCodeValue: null,
 			}
 		},
 		methods:{
@@ -182,7 +188,7 @@
 
 <style scoped lang="scss">
 	@import 'static/css/mixin.scss';
-	.member-register-wrapper{
+	.agent-register-wrapper{
 		width: 100%;
 		height: 100%;
 		background-color: #fff;

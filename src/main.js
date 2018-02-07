@@ -15,6 +15,7 @@ import 'static/js/jquery-1.9.1.min.js'
 import store from '@/store/store'
 import echarts from 'echarts'
 import axios from 'axios'
+import 'static/css/edit.css'
 
 
 Vue.config.productionTip = false

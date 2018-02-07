@@ -1,11 +1,27 @@
 <template>
-	<div class="member-register-wrapper">
+	<div class="team-register-wrapper">
 		<header>
 			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
-			<p>注册会员</p>
+			<p>注册团队</p>
 			<div class="take-place"></div>
 		</header>
 		<div class="register-item-container">
+		    <div class="register-item-wrapper">
+				<div class="register-item">
+					<input type="text" name="" placeholder="请输入店铺名称" v-model="storeNameValue">
+				</div>
+				<mt-popup v-model="storeNamePopup" popup-transition="popup-fade" class="popup-error-message" :modal="false">
+			        {{storeNameErrorMessage}}
+			    </mt-popup>
+			</div>
+			<div class="register-item-wrapper">
+				<div class="register-item">
+					<input type="text" name="" placeholder="请输入店铺账号" v-model="storeIdentityValue">
+				</div>
+				<mt-popup v-model="storeIdentityPopup" popup-transition="popup-fade" class="popup-error-message" :modal="false">
+			        {{storeIdentityErrorMessage}}
+			    </mt-popup>
+			</div>
 			<div class="register-item-wrapper">
 				<div class="register-item">
 					<span class="mobile-number-span">+86</span>
@@ -88,6 +104,12 @@
 				newEyeClose: false,
 				repeatEyeClose: false,
 				agree: true,
+				storeNameValue: null,
+				storeNamePopup: false,
+				storeNameErrorMessage: null,
+				storeIdentityValue: null,
+				storeIdentityPopup: false,
+				storeIdentityErrorMessage: null,
 				mobileNumberValue: null,
 				mobileNumberPopup: false,
 				mobileNumberErrorMessage: null,
@@ -182,7 +204,7 @@
 
 <style scoped lang="scss">
 	@import 'static/css/mixin.scss';
-	.member-register-wrapper{
+	.team-register-wrapper{
 		width: 100%;
 		height: 100%;
 		background-color: #fff;
