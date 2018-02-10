@@ -37,4 +37,39 @@ input::-webkit-input-placeholder {
 }
 input::-moz-placeholder { 
 	color: #999; 
-}	
+}
+.anchorBL{
+	display:none;
+}
+.label-container{
+	width: 150px;
+	padding: 2px 8px;
+	color: #fff;
+	height: auto;
+	background-color: rgba(0,0,0,0.6);
+	border-radius: 3px;
+	font-size: 12px;
+	position: absolute;
+	bottom: 20px;
+}
+.label-container::after{
+	display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    border-width: 10px;
+    border-right-color: rgba(0,0,0,0.6);
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: rotateZ(45deg) translateX(-50%) translateY(50%);
+    
+
+}
+.label-container a{
+	color: blue;
+}
+.BMapLabel{
+	z-index: 100000000;
+}

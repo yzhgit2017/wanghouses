@@ -25,6 +25,8 @@ import reviewResult from '@/components/loginAndRegister/reviewResult'
 import findRoom from '@/components/findRoom/findRoom'
 import propertyComparison from '@/components/newHouses/propertyComparison/propertyComparison'
 import condoTour from '@/components/condoTour/condoTour'
+import condoTourEnter from '@/components/condoTour/enter'
+import mapAround from '@/components/newHouses/mapAround'
 
 Vue.use(Router)
 
@@ -154,6 +156,16 @@ export default new Router({
       path: '/condoTour',
       name: 'condoTour',
       component: condoTour
+    },
+    {
+      path: '/condoTourEnter',
+      name: 'condoTourEnter',
+      component: condoTourEnter
+    },
+    {
+      path: '/mapAround',
+      name: 'mapAround',
+      component: mapAround
     },
   ]
 })
