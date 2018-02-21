@@ -1,7 +1,7 @@
 <template>
 	<div class="city-change-wrapper">
 		<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>选择城市</p>
 			<div class="take-place"></div>
 		</header>
@@ -61,6 +61,9 @@
 			console.log(this.cityList)
 		},
 		methods: {
+			goBack(){
+				this.$router.go(-1);
+			},
 			pySegSort(arr,empty) {
 			    if(!String.prototype.localeCompare)
 			        return null;

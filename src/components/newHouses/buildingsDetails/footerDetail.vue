@@ -2,7 +2,7 @@
 	<div class="footer-detail-wrapper">
 		<router-link to="" class="enter"><img src="static/images/enter.png"></router-link>
 		<p class="lead">没有找到合适的房源？快来试试帮我找房！</p>
-		<router-link to="" class="help-find">帮我找房</router-link>
+		<router-link to="/findRoom" class="help-find">帮我找房</router-link>
 		<div class="other">
 			<router-link to="" style="background-color: #f4736e;">我要推荐</router-link>
 			<router-link to="" style="background-color: #fb9d55;">预约看房</router-link>

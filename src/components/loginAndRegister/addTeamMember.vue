@@ -1,7 +1,7 @@
 <template>
 	<div class="add-team-member-wrapper">
 		<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>添加团队成员</p>
 			<div class="take-place"></div>
 		</header>
@@ -128,6 +128,9 @@
 			}
 		},
 		methods:{
+			goBack(){
+				this.$router.go(-1);
+			},
 			newPasswordShow(){
 				this.newEyeClose = !this.newEyeClose;
 				let obj = document.querySelector('#password-input-new');

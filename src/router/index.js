@@ -27,6 +27,7 @@ import propertyComparison from '@/components/newHouses/propertyComparison/proper
 import condoTour from '@/components/condoTour/condoTour'
 import condoTourEnter from '@/components/condoTour/enter'
 import mapAround from '@/components/newHouses/mapAround'
+import est from '@/components/newHouses/est'
 
 Vue.use(Router)
 
@@ -166,6 +167,11 @@ export default new Router({
       path: '/mapAround',
       name: 'mapAround',
       component: mapAround
+    },
+    {
+      path: '/est',
+      name: 'est',
+      component: est
     },
   ]
 })

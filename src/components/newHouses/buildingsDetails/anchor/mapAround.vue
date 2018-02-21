@@ -1,7 +1,7 @@
 <template>
 	<div class="map-around-wrapper" id="anchor-6">
 		<div class="title">
-			<h2>周边配套</h2>
+			<h2><router-link to="/mapAround">周边配套</router-link></h2>
 			<router-link to="">更多详情</router-link>
 		</div>
 		<div id="mapAround">

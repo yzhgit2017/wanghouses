@@ -1,7 +1,7 @@
 <template>
 	<div class="cash-deposit-wrapper">
 		<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>缴纳保证金</p>
 			<div class="take-place"></div>
 		</header>
@@ -42,6 +42,9 @@
 		    }
 		},
 		methods: {
+			goBack(){
+				this.$router.go(-1);
+			},
 			payChoice(index){
 				this.isIndex = index;
 			}

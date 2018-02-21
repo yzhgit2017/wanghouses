@@ -11,7 +11,7 @@
 				<p>在法律对于保证金缺乏明确规范的背景下，探讨保证金的类型，对于备用金类型的保证金、预付款类型的保证金、租赁保证金、装修保证金、定金类型的保证金、保有返还请求权的保证金、无双倍返还效力的保证金分别界定，确定各自的法律效力，十分必要。</p>
 				<p>在证券市场融资购买证券时，投资者所需缴纳的自备款。</p>
 			</section>
-			<router-link to="" class="go-pay-page">缴纳保证金</router-link>
+			<router-link to="/payCashDeposit" class="go-pay-page">缴纳保证金</router-link>
 		</div>		
 	</div>
 </template>

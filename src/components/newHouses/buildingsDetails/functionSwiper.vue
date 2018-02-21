@@ -15,7 +15,7 @@
 	            	</router-link>
 	            </div>
 	            <div class="swiper-slide">
-	            	<router-link to="" class="function-item-link">
+	            	<router-link to="/condoTour" class="function-item-link">
 	            		<span class="icon-span"><i class="iconfont icon-gongjiaoche"></i></span>
 	            		<p>看房团</p>
 	            	</router-link>

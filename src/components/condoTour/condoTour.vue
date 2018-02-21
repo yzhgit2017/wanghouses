@@ -1,7 +1,7 @@
 <template>
 	<div class="condo-tour-wrapper">
 	    <header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>看房团</p>
 			<div class="take-place"></div>
 		</header>
@@ -47,7 +47,7 @@
 						<p><span class="span1">2.公元世家</span><span style="color:red;">16000</span><span>元/㎡</span></p>
 						<p><span class="span1">3.贤文世家</span><span style="color:red;">16000</span><span>元/㎡</span></p>
 					</div>
-					<router-link to="" class="enter-btn">免费报名</router-link>		
+					<router-link to="/condoTourEnter" class="enter-btn">免费报名</router-link>		
 				</router-link>
 			</li>
 		</ul>
@@ -66,6 +66,9 @@
             this.rolling();
 		},
 		methods:{
+			goBack(){
+				this.$router.go(-1);
+			},
             rolling(){ 
                 let h = (document.documentElement.clientWidth / 320) * 20 * 2              	
             	new Swiper('.enter-swiper',{

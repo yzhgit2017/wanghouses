@@ -1,14 +1,14 @@
 <template>
 	<div class="review-result-wrapper">
 		<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p></p>
 			<div class="take-place"></div>
 		</header>
 		<div class="result-container">
-			<div class="icon-wrapper"><img src="static/images/shehe2@3x.png"></div>
-			<p class="p-title">审核成功</p>
-			<p class="p-content">感谢您认证旺屋职业经纪人，您的资料已经审核成功，点击确认进入登录系统</p>
+			<div class="icon-wrapper"><img src="static/images/shehe1@3x.png"></div>
+			<p class="p-title">账号审核中</p>
+			<p class="p-content">感谢您认证旺屋职业经纪人，我们会在1-2个工作日内为您审核认证资料，审核完成后我们会通过短信形式通知您。</p>
 			<div class="sure-btn">我知道了</div>
 		</div>
 	</div>
@@ -17,6 +17,11 @@
 <script>
 	export default {
 		name: 'reviewResult',
+		methods:{
+			goBack(){
+				this.$router.go(-1);
+			},
+		},
 	}
 </script>
 

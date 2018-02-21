@@ -1,7 +1,7 @@
 <template>
 	<div class="agent-register-wrapper">
 		<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>注册经纪人</p>
 			<div class="take-place"></div>
 		</header>
@@ -117,6 +117,9 @@
 			}
 		},
 		methods:{
+			goBack(){
+				this.$router.go(-1);
+			},
 			newPasswordShow(){
 				this.newEyeClose = !this.newEyeClose;
 				let obj = document.querySelector('#password-input-new');
@@ -176,7 +179,8 @@
 			            duration: 1000
 			        });
 				}else if(!this.mobileNumberPopup && !this.verificationCodePopup && !this.userNamePopup && !this.userNamePopup && !this.repeatPasswordPopup && !this.positionPopup){
-					this.successPopup = true;
+					// this.successPopup = true;
+					this.$router.push('/');
 				}
 			},
 			continueRegister(){

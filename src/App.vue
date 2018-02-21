@@ -37,6 +37,7 @@ export default {
         background-color: #f7fbfc;
         width: 100%;
         height: 100%;
+        // font-size: .6rem;
         // min-height: 100%;
     }
 </style>

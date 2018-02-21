@@ -1,7 +1,7 @@
 <template>
 	<div class="map-around-wrapper" id="map-around-wrapper">
 		<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>周边配套</p>
 			<div class="take-place"></div>
 		</header>
@@ -10,12 +10,12 @@
 			<div class="swiper-container around-nav-swiper">
 		        <div class="swiper-wrapper">
 		            <div class="swiper-slide" v-bind:class="{'active': !gongjiaoMarkShow}" @click="loadTransit()">
-		            	<div><i class="iconfont icon-gongjiao"></i></div>
-		            	<p>公交</p>
-		            </div>
-		            <div class="swiper-slide" v-bind:class="{'active': !ditieMarkShow}" @click="loadditie()">
 		            	<div><i class="iconfont icon-ditie"></i></div>
 		            	<p>地铁</p>
+		            </div>
+		            <div class="swiper-slide" v-bind:class="{'active': !ditieMarkShow}" @click="loadditie()">
+		            	<div><i class="iconfont icon-gongjiao"></i></div>
+		            	<p>公交</p>
 		            </div>
 		            <div class="swiper-slide" v-bind:class="{'active': !xuexiaoMarkShow}" @click="loadxuexiao($event)">
 		            	<div><i class="iconfont icon-xuexiao"></i></div>
@@ -76,6 +76,9 @@
 			this.newSwiper();
 		},
 		methods:{
+			goBack(){
+				this.$router.go(-1);
+			},
 			init(){
 				let mac = document.querySelector('#map-around-container');
 				let maw = document.querySelector('#map-around-wrapper');
@@ -104,7 +107,7 @@
 							let a = [];
 							for (var i = 0; i < results.getCurrentNumPois(); i ++){
 								s.push(results.getPoi(i).title + ", " + results.getPoi(i).point.lat);
-								let myIcon = new BMap.Icon("static/images/mapAround/gongjiao.png", new BMap.Size(48,48));
+								let myIcon = new BMap.Icon("static/images/mapAround/ditie.png", new BMap.Size(48,48));
 								let pt = new BMap.Point(results.getPoi(i).point.lng, results.getPoi(i).point.lat);
 								let marker = new BMap.Marker(pt,{icon:myIcon});		
 								// 创建文字标签
@@ -172,7 +175,7 @@
 				};
 				if(this.gongjiaoMark.length == 0){
 					var local = new BMap.LocalSearch(map, options);
-				    local.search("公交");
+				    local.search("地铁");
 				}else{
 					if (this.gongjiaoMarkShow) {
 						for (let i = 0; i < this.gongjiaoMark.length; i++) {
@@ -202,9 +205,9 @@
 							let a = [];
 							for (var i = 0; i < results.getCurrentNumPois(); i ++){
 								s.push(results.getPoi(i).title + ", " + results.getPoi(i).point.lat);
-								let myIcon = new BMap.Icon("static/images/mapAround/ditie.png", new BMap.Size(48,48));
+								let myIcon = new BMap.Icon("static/images/mapAround/gongjiao.png", new BMap.Size(48,48));
 								let pt = new BMap.Point(results.getPoi(i).point.lng, results.getPoi(i).point.lat);
-								let marker = new BMap.Marker(pt,{icon:myIcon});		
+								let marker = new BMap.Marker(pt,{icon:myIcon});
 								// 创建文字标签
 								let opts = {
 								    position : results.getPoi(i).point,    // 指定文本标注所在的地理位置
@@ -270,7 +273,7 @@
 				};
 				if(this.ditieMark.length == 0){
 					var local = new BMap.LocalSearch(map, options);
-				    local.search("地铁");
+				    local.search("公交");
 				}else{
 					if (this.ditieMarkShow) {
 						for (let i = 0; i < this.ditieMark.length; i++) {

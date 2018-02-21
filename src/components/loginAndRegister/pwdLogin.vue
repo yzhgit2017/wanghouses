@@ -27,8 +27,8 @@
 			</div>
 			<div class="login-btn" @click="goHome()">登录</div>
 			<div class="bottom-container">
-				<router-link to="" class="go-register">注册</router-link>
-				<router-link to="" class="find-password">找回密码</router-link>
+				<router-link to="/choiceIdentity" class="go-register">注册</router-link>
+				<router-link to="/getBackPasswordFirst" class="find-password">找回密码</router-link>
 			</div>
 		</div>
 		<div class="third-party-logins-wrapper">

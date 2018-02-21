@@ -5,7 +5,7 @@
 		</div>
 		<ul class="tenBuildings-list">
 			<li v-for="(item,index) in tenBuildingsList">
-				<router-link to="">
+				<router-link to="/buildingsDetails">
 					<div class="img-wrapper">
 						<img :src="'http://wangwu.lami360.com' + item.houses_img">
 					</div>

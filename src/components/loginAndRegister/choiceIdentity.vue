@@ -1,43 +1,43 @@
 <template>
 	<div class="choice-identity-wrapper">
 	  	<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>选择用户身份</p>
 			<div class="take-place"></div>
 		</header>
 		<ul class="identity-list">
 			<li>
-				<router-link to="">
+				<router-link to="/memberRegister">
 					<div class="img-wrapper"><img src="static/images/qw1@3x.png"></div>
 					<p>注册会员</p>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="">
+				<router-link to="/agentRegister">
 					<div class="img-wrapper"><img src="static/images/qw2@3x.png"></div>
 					<p>我是经纪人</p>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="">
+				<router-link to="/teamRegister">
 					<div class="img-wrapper"><img src="static/images/qw3@3x.png"></div>
 					<p>我是经纪人团队</p>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="">
+				<router-link to="/agentCompany">
 					<div class="img-wrapper"><img src="static/images/qw4@3x.png"></div>
 					<p>我是经纪人公司</p>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="">
+				<router-link to="/designerRegister">
 					<div class="img-wrapper"><img src="static/images/qw5@3x.png"></div>
 					<p>我是设计师</p>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="">
+				<router-link to="/decorationCompany">
 					<div class="img-wrapper"><img src="static/images/qw6@3x.png"></div>
 					<p>我是装修公司</p>
 				</router-link>
@@ -55,6 +55,11 @@
 <script>
 	export default {
 		name: 'choiceIdentity',
+		methods:{
+			goBack(){
+				this.$router.go(-1);
+			}
+		},
 	}
 </script>
 

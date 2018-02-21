@@ -1,7 +1,7 @@
 <template>
 	<div class="buildings-search-wrapper">
 		<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>搜索</p>
 			<div class="take-place"></div>
 		</header>
@@ -59,7 +59,9 @@
 			
 		},
 		methods: {
-			
+			goBack(){
+				this.$router.go(-1);
+			},
 		}
 	}
 </script>

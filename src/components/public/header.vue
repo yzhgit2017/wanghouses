@@ -3,17 +3,17 @@
 		<header class="header">
 			<div class="header-container" v-if="selfHomeHeader">
 				<router-link to="/cityChange" class="geolocation">{{cityName}}<i class="iconfont icon-arrow-down-new"></i></router-link>
-				<router-link to="" class="search"><i class="iconfont icon-sousuo-copy"></i>请输入楼盘名</router-link>
-				<router-link to="" class="personal"><i class="iconfont icon-gerenzhongxin1"></i><br>我的</router-link>
+				<router-link to="/buildingsSearch" class="search"><i class="iconfont icon-sousuo-copy"></i>请输入楼盘名</router-link>
+				<router-link to="/pwdLogin" class="personal"><i class="iconfont icon-gerenzhongxin1"></i><br>我的</router-link>
 			</div>
 			<div class="header-container" v-if="selfBuildingsListHeader">
 				<span class="geolocation" @click="goBack()"><i class="iconfont icon-arrow"></i>返回</span>
-				<router-link to="" class="search"><i class="iconfont icon-sousuo-copy"></i>请输入小区名称或地址</router-link>
+				<router-link to="/buildingsSearch" class="search"><i class="iconfont icon-sousuo-copy"></i>请输入小区名称或地址</router-link>
 				<router-link to="" class="map"><i class="iconfont icon-chakantiezidingwei"></i></router-link>
 			</div>
 			<div class="header-container details-header-wrapper" v-if="selfBuildingsDetailsHeader">
 				<div>
-					<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+					<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 				</div>
 				<div>
 					<router-link to="" class="collect"><i class="iconfont icon-shoucang"></i></router-link>
@@ -53,7 +53,7 @@
 		methods:{
 			goBack(){
 				this.$router.go(-1);
-			}
+			},
 		},
 		watch:{
             paramCityName: function(){

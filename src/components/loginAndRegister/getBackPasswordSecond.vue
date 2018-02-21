@@ -1,7 +1,7 @@
 <template>
 	<div class="member-register-wrapper">
 		<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>忘记密码</p>
 			<div class="take-place"></div>
 		</header>
@@ -25,7 +25,7 @@
 			        {{repeatPasswordErrorMessage}}
 			    </mt-popup>
 			</div>
-			<div class="register-btn">完成</div>	
+			<div class="register-btn" @click="finish()">完成</div>	
 		</div>		
 	</div>
 </template>
@@ -47,6 +47,12 @@
 			}
 		},
 		methods:{
+			goBack(){
+				this.$router.go(-1);
+			},
+			finish(){
+				this.$router.push('/pwdLogin');
+			},
 			newPasswordShow(){
 				this.newEyeClose = !this.newEyeClose;
 				let obj = document.querySelector('#password-input-new');

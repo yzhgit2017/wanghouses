@@ -3,7 +3,7 @@
 		<header>
 			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
 			<p>注册团队成员</p>
-			<div class="take-place"><img src="static/images/zengjia@3x.png"></div>
+			<div class="take-place"><router-link to="/addTeamMember"><img src="static/images/zengjia@3x.png"></router-link></div>
 		</header>
 		<ul class="team-member-list">
 			<li>

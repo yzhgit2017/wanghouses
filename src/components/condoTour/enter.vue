@@ -1,7 +1,7 @@
 <template>
 	<div class="enter-wrapper">
 		<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>免费报名</p>
 			<div class="take-place"></div>
 		</header>
@@ -69,6 +69,9 @@
 			}
 		},
 		methods:{
+			goBack(){
+				this.$router.go(-1);
+			},
 			changeValue(index){
 				this.isIndex = index;
 			},

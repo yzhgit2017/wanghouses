@@ -4,7 +4,7 @@
 		    <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
 		        <ul class="page-loadmore-list buildings-list">
 		            <li v-for="item in list">
-						<router-link to="">
+						<router-link to="/buildingsDetails">
 							<div class="img-wrapper">
 								<img :src="'http://wangwu.lami360.com' + item.houses_img">
 							</div>

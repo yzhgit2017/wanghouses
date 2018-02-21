@@ -1,7 +1,7 @@
 <template>
 	<div class="member-register-wrapper">
 		<header>
-			<router-link to="" class="back"><i class="iconfont icon-arrow"></i></router-link>
+			<span class="back" @click="goBack()"><i class="iconfont icon-arrow"></i></span>
 			<p>忘记密码</p>
 			<div class="take-place"></div>
 		</header>
@@ -24,7 +24,7 @@
 			        {{verificationCodeErrorMessage}}
 			    </mt-popup>
 			</div>
-			<div class="register-btn">下一步</div>	
+			<div class="register-btn" @click="next()">下一步</div>	
 		</div>		
 	</div>
 </template>
@@ -44,7 +44,12 @@
 			}
 		},
 		methods:{
-			
+			goBack(){
+				this.$router.go(-1);
+			},
+			next(){
+				this.$router.push('/getBackPasswordSecond')
+			},
 		}
 	}
 </script>
